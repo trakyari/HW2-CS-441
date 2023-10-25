@@ -38,6 +38,11 @@ object Main {
 
     val graph = Graph(rdd_nodes, rdd_edges)
 
+    // Find vertices that contain valuable data
+    val valuable_nodes = graph.vertices.filter(_._2.valuableData == true)
+
+
+
     sc.stop()
   }
 }
