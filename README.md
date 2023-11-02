@@ -5,18 +5,41 @@ atraky2@uic.edu
 
 ## Prerequisites
 
-- Spark 3.5.0
+- Spark 3.5.0 (running Scala 2.13.8)
 - JDK 11, https://adoptium.net/
 
 ## Run the project
+
+### Make sure Spark is running (if running locally)
+Start Spark on your machine if running locally.
+
+The instructions are for Windows users who have to start
+services manually.
+
+In Spark home directory `bin` folder:
+```shell
+.\spark-class org.apache.spark.deploy.master.Master
+```
+
+Spark is very picky about IPs. If this fails, go to the terminal where
+you started master and grab the `spark://host:port` that is provided.
+```shell
+.\spark-class org.apache.spark.deploy.worker.Worker spark://localhost:7077
+```
+
 ### Create the jar file
 ```shell
 sbt clean compile assembly
 ```
 
-### Run via the command line 
+### Run locally
 ```shell
-~/spark-3.5.0-bin-hadoop3/bin/spark-submit --master local[4] target/scala-2.13/HW2.jar 
+~/spark-3.5.0-bin-hadoop3-scala2.13/bin/spark-submit.cmd --master local[4] --class Main target/scala-2.13/HW2.jar 
+```
+
+### Run via the command line (submit to Spark cluster)
+```shell
+~/spark-3.5.0-bin-hadoop3-scala2.13/bin/spark-submit.cmd --master spark://192.168.50.64:7077 --executor-memory 20G --total-executor-cores 4 target/scala-2.13/HW2.jar 
 ```
 
 or

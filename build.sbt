@@ -1,7 +1,10 @@
 
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
-ThisBuild / scalaVersion := "2.13.12"
+ThisBuild / scalaVersion := "2.13.8"
+
+Global / excludeLintKeys += test / fork
+Global / excludeLintKeys += run / mainClass
 
 val guavaVersion = "31.1-jre"
 val scalaTestVersion = "3.2.11"
@@ -48,11 +51,18 @@ scalacOptions ++= Seq(
 compileOrder := CompileOrder.JavaThenScala
 test / fork := true
 run / fork := true
+run / javaOptions ++= Seq(
+  "-Xms8G",
+  "-Xmx100G",
+  "-XX:+UseG1GC"
+)
+
+Compile / mainClass := Some("Main")
+run / mainClass := Some("Main")
 
 assembly / assemblyJarName := "HW2.jar"
 
 ThisBuild / assemblyMergeStrategy := {
   case PathList("META-INF", _*) => MergeStrategy.discard
-  case "reference.conf" => MergeStrategy.concat
   case _ => MergeStrategy.first
 }
