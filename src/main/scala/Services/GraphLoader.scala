@@ -1,15 +1,9 @@
 package Services
 
-import NetGraphAlgebraDefs.{Action, NetGraphComponent, NodeObject}
-import com.google.common.graph.MutableValueGraph
+import NetGraphAlgebraDefs._
 import org.apache.spark.SparkContext
-import org.apache.spark.rdd.RDD
 
-import java.io.{ByteArrayInputStream, FileInputStream, IOException, ObjectInputStream}
-import java.util.Base64
-import java.nio.charset.StandardCharsets.UTF_8
-import scala.collection.convert.ImplicitConversions.`seq AsJavaList`
-import scala.util.{Failure, Success, Try}
+import java.io.{ByteArrayInputStream, IOException, ObjectInputStream}
 
 // Adapted from NetGameSim net graph load
 object GraphLoader {
@@ -36,14 +30,5 @@ object GraphLoader {
     } else {
       Some(netGraphComponentsList.collect().head.toList)
     }
-//    Try(new FileInputStream(s"$dir$fileName"))
-//      .map(fis => (fis, new ObjectInputStream(fis)))
-//      .map { case (fis, ois) =>
-//        println(s"Trying to open: $dir$fileName")
-//        val ng = ois.readObject.asInstanceOf[List[NetGraphComponent]]
-//        ois.close()
-//        fis.close()
-//        ng
-//      }.toOption
   }
 }

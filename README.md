@@ -34,12 +34,12 @@ sbt clean compile assembly
 
 ### Run locally
 ```shell
-~/spark-3.5.0-bin-hadoop3-scala2.13/bin/spark-submit.cmd --master local[4] --class Main target/scala-2.13/HW2.jar 
+~/spark-3.5.0-bin-hadoop3-scala2.13/bin/spark-submit.cmd --master local[4] --class Main --jars target/scala-2.13/HW2.jar --driver-class-path target/scala-2.13/HW2.jar target/scala-2.13/HW2.jar 
 ```
 
 ### Run via the command line (submit to Spark cluster)
 ```shell
-~/spark-3.5.0-bin-hadoop3-scala2.13/bin/spark-submit.cmd --master spark://192.168.50.64:7077 --executor-memory 20G --total-executor-cores 4 target/scala-2.13/HW2.jar 
+~/spark-3.5.0-bin-hadoop3-scala2.13/bin/spark-submit.cmd --master spark://192.168.50.64:7077 --executor-memory 20G --class Main --jars target/scala-2.13/HW2.jar --driver-class-path target/scala-2.13/HW2.jar target/scala-2.13/HW2.jar 
 ```
 
 or
