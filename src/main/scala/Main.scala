@@ -21,7 +21,6 @@ object Main {
   val ipAddr: InetAddress = InetAddress.getLocalHost
   val hostName: String = ipAddr.getHostName
   val hostAddress: String = ipAddr.getHostAddress
-  val defaultDir = "C:\\Users\\tarij\\Documents\\UIC\\CS441\\HW2\\"
   private val jarOutputDirectory = getConfigEntry(Constants.globalConfig, JAR_OUTPUT_DIRECTORY, DEFAULT_JAR_OUTPUT_DIRECTORY)
   private val similarityThreshold = getConfigEntry(Constants.globalConfig, SIMILARITY_THRESHOLD, DEFAULT_SIMILARITY_THRESHOLD)
   private val originalGraphFileName = getConfigEntry(globalConfig, ORIGINAL_GRAPH_FILE_NAME, DEFAULT_ORIGINAL_GRAPH_FILE_NAME)
@@ -66,17 +65,14 @@ object Main {
     // val spark = SparkSession.builder.appName("HW2").getOrCreate()
     // val sc = spark.sparkContext
 
-    // Get the current directory
-    val defDir = defaultDir
-
     // Load the original graph
-    val originalGraphFile = GraphLoader.load(originalGraphFileName, defDir, sc)
+    val originalGraphFile = GraphLoader.load(originalGraphFileName, "",sc)
     checkGraphValidity(originalGraphFile)
 
     val originalGraphComponents = createGraphComponents(originalGraphFile)
 
     // Load the perturbed graph
-    val perturbedGraphFile = GraphLoader.load(perturbedGraphFileName, defDir, sc)
+    val perturbedGraphFile = GraphLoader.load(perturbedGraphFileName, "",sc)
     checkGraphValidity(perturbedGraphFile)
 
     val perturbedGraphComponents = createGraphComponents(perturbedGraphFile)

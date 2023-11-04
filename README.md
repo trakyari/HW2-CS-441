@@ -35,7 +35,7 @@ sbt clean compile assembly
 ### Run locally (Apache Spark compiled against Scala 2.13)
 2.13.10 gives no issues.
 ```shell
-~/spark-3.5.0-bin-hadoop3-scala2.13/bin/spark-submit.cmd --master local[4] --class Main --jars target/scala-2.13/HW2.jar --driver-class-path target/scala-2.13/HW2.jar target/scala-2.13/HW2.jar 
+~/spark-3.5.0-bin-hadoop3-scala2.13/bin/spark-submit.cmd --master local[4] --class Main --jars target/scala-2.13/HW2.jar --driver-class-path target/scala-2.13/HW2.jar -Doriginal_graph_file_name="example.ngs" target/scala-2.13/HW2.jar 
 ```
 
 ### Run locally (Apache Spark compiled against Scala 2.12)
@@ -90,6 +90,22 @@ stochastic process to determine what to do on each step of the walk. The possibl
 options of the outcome of the process is to either to 
 - finish the walk
 - move to a neighboring node
+
+If the attacker decides to end the walk, then nothing else happens.
+
+If the attacker looks at the neighbors of the current node and sees that
+there are available neighbors to walk to, they will pick one of the neighbors
+at random and walk there provided are iterations still left.
+
+Upon arriving to the node, the attacker will then perform a SimRank on the node
+by comparing it to all nodes in the original network (graph). After performing
+the similarity analysis, the attacker will then pick at random one of the nodes
+that was equal to or above the similarity threshold. The SimRank algorithm has been
+reused from HW1.
+
+If the attacker finds themselves stuck, the walk will end there. Additionally,
+if the attacker attempted to perform an attack on the current node and was unsuccessful
+the walk will end there as well.
 
 This attack is performed on the `perturbed` graph since it represents the actual
 network topology including honeypots and modifications to existing machines.
