@@ -1,7 +1,7 @@
 
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
-ThisBuild / scalaVersion := "2.13.8"
+ThisBuild / scalaVersion := "2.13.10"
 
 Global / excludeLintKeys += test / fork
 Global / excludeLintKeys += run / mainClass
@@ -15,7 +15,7 @@ val netModelGeneratorVersion = "0.1.0-SNAPSHOT"
 val hadoopCommonVersion = "3.3.2"
 val hadoopHdfsClientVersion = "3.3.2"
 val logbackClassicVersion = "1.1.3"
-val sparkVersion = "3.5.0"
+val sparkVersion = "3.4.1"
 
 lazy val commonDependencies = Seq(
   "org.scalatest" %% "scalatest" % scalaTestVersion % Test,
@@ -43,7 +43,8 @@ scalacOptions ++= Seq(
   // emit warning and location for usages of deprecated APIs
   "-deprecation",
   // explain type errors in more detail
-  "--explain-types",
+  // Disable for Scala 2.12.x
+  //  "--explain-types",
   // emit warning and location for usages of features that should be imported explicitly
   "-feature"
 )

@@ -28,6 +28,9 @@ object Constants {
   val DEFAULT_NUMBER_OF_ATTACKERS = 10
   val NUMBER_OF_ATTACKERS = "numberOfAttackers"
 
+  val DEFAULT_JAR_OUTPUT_DIRECTORY = "target\\scala-2.12\\HW2.jar"
+  val JAR_OUTPUT_DIRECTORY = "jarOutputDirectory"
+
   val OUTPUT_DIRECTORY = "outputDirectory"
 
   val globalConfig: Config = obtainConfigModule(config, CONFIGENTRYNAME)

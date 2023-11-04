@@ -5,7 +5,7 @@ atraky2@uic.edu
 
 ## Prerequisites
 
-- Spark 3.5.0 (running Scala 2.13.8)
+- Spark 3.4.1 (running Scala 2.13.10)
 - JDK 11, https://adoptium.net/
 
 ## Run the project
@@ -32,9 +32,19 @@ you started master and grab the `spark://host:port` that is provided.
 sbt clean compile assembly
 ```
 
-### Run locally
+### Run locally (Apache Spark compiled against Scala 2.13)
+2.13.10 gives no issues.
 ```shell
 ~/spark-3.5.0-bin-hadoop3-scala2.13/bin/spark-submit.cmd --master local[4] --class Main --jars target/scala-2.13/HW2.jar --driver-class-path target/scala-2.13/HW2.jar target/scala-2.13/HW2.jar 
+```
+
+### Run locally (Apache Spark compiled against Scala 2.12)
+2.12 gives issues with serial UUID for Scala list.
+
+Amazon EMR 6.14.0 supports Scala 2.12.15 with Apache Spark 3.4.1
+
+```shell
+~/spark-3.4.1-bin-hadoop3/bin/spark-submit.cmd --master local[4] --class Main --jars target/scala-2.12/HW2.jar --driver-class-path target/scala-2.12/HW2.jar target/scala-2.12/HW2.jar 
 ```
 
 ### Run via the command line (submit to Spark cluster)
@@ -46,6 +56,12 @@ or
 
 ### Run via Intellij
 Load the project in Intellij IDEA and click on start.
+
+## Run tests
+
+```shell
+sbt clean compile test
+```
 
 ## Design
 ### Preprocessing
@@ -83,3 +99,9 @@ to the number of nodes in the graph multiplied by a constant.
 
 The number of iterations or in other words the number of attacks performed is also
 set but can be configured to adjust the number of attacks simulated.
+
+## Configuration
+
+- similarity threshold: the threshold for which nodes to have match in order to be considered a valid match
+    * if this is too low there will be too many matches
+- number of attackers: number of starting nodes from random walkers start walking

@@ -32,6 +32,7 @@ object ConfigReader {
             }
           case scala.util.Failure(_) => defValue
         }
+      case scala.util.Failure(_) => defValue
     }
   }
 }
