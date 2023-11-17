@@ -1,0 +1,8 @@
+Student: Arijus Trakymas
+
+No AWS deployment/Video = -0.5%
+
+Good solution! Your code is clean, but I would have liked to see a video of this deployed on AWS.
+Good job overall
+
+Final Grade = 14.5%
